@@ -6,16 +6,16 @@ namespace RF.Control
 {
     public class TrampolineController : MonoBehaviour
     {
+        [Header("MOVEMENT")]
         [SerializeField] private float moveSpeed = 5f;
-        [SerializeField] private float tiltSpeed = 20f;
+        [SerializeField] private float boundX = 2.5f;
 
-        [SerializeField] private float maxTilt;
-
-
-        Vector2 movementVector;
-        [SerializeField] float tilt;
+        [Header("BOUNCING")]
+        [SerializeField] private float maxBounceAngle;
 
         private InputManager inputManager;
+
+        Vector2 movementVector;
 
         private void Awake()
         {
@@ -26,29 +26,27 @@ namespace RF.Control
         {
             movementVector = new Vector2(inputManager.GetMoveValue(), 0);
 
-
             HandleMovement();
-            HandleTilt();
         }
 
         private void HandleMovement()
         {
+            if (transform.position.x < -boundX && movementVector.x < 0) return;
+            if (transform.position.x > boundX && movementVector.x > 0) return;
+            
             transform.Translate(movementVector * moveSpeed * Time.deltaTime, Space.World);
         }
 
-        private void HandleTilt()
-        {
-            float tiltValue = inputManager.GetTiltValue();
-
-            transform.Rotate(0, 0, inputManager.GetTiltValue() * tiltSpeed * Time.deltaTime);
-        }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (!collision.gameObject.TryGetComponent<KitchenObject>(out KitchenObject kitchenObject)) return;
+            if (!collision.gameObject.TryGetComponent<Item>(out Item kitchenObject)) return;
 
-            Vector3 kitchenObjectMoveDir = new Vector3(-transform.rotation.z, 1, 0).normalized;
-            
+            float differenceX =  kitchenObject.transform.position.x - transform.position.x;
+            differenceX = Mathf.Clamp(differenceX, -maxBounceAngle, maxBounceAngle);
+
+            Vector3 kitchenObjectMoveDir = new Vector3(differenceX, 1, 0).normalized;
+
             kitchenObject.ApplyForce(kitchenObjectMoveDir);
         }
     }

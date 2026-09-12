@@ -5,7 +5,7 @@ namespace RF.Core
 {
     public class ObjectSpawner : MonoBehaviour
     {
-        [SerializeField] private KitchenObject kitchenObject;
+        [SerializeField] private Item kitchenObject;
 
         [SerializeField] private float spawnInterval = 10f;
 

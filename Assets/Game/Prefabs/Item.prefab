@@ -231,9 +231,9 @@ GameObject:
   - component: {fileID: 444471094413776209}
   - component: {fileID: 4705098307909639798}
   - component: {fileID: 6354480740459354233}
-  m_Layer: 0
-  m_Name: KitchenObject
-  m_TagString: KitchenObject
+  m_Layer: 8
+  m_Name: Item
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -267,12 +267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RF.GameLoop.KitchenObject
   bounceForce: 10
-  shelfLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  wallLayer:
-    serializedVersion: 2
-    m_Bits: 128
+  contactCollider: {fileID: 444471094413776209}
 --- !u!61 &444471094413776209
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -280,10 +275,10 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6397057619730231921}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 97655acca6aba4549afab9b19100081f, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

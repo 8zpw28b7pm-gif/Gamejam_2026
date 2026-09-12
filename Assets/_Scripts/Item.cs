@@ -2,43 +2,35 @@ using UnityEngine;
 
 namespace RF.GameLoop
 {
-    public class KitchenObject : MonoBehaviour
+    public class Item : MonoBehaviour
     {
         [SerializeField] private float bounceForce = 5;
-        [SerializeField] private LayerMask shelfLayer;
-        [SerializeField] private LayerMask wallLayer;
+        [SerializeField] private Collider2D contactCollider;
+
+        int itemMask = -1;
 
         private Rigidbody2D rb;
-        private bool isFalling;
-
-        private BoxCollider2D col;
 
         private void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
-            col = GetComponent<BoxCollider2D>();
         }
 
         private void OnEnable()
         {
-            CupCounter.Instance.RegisterCup();
+            itemMask = LayerMask.GetMask("Item");
+            contactCollider.enabled = false;
         }
-        private void OnDisable()
-        {
-            CupCounter.Instance.DeregisterCup();
-        }
+
         private void Update()
         {
-            isFalling = rb.linearVelocityY < 0.01f;
-
-            col.excludeLayers = LayerMask.NameToLayer("Shelf");
-            if (isFalling)
+            if (IsRising())
             {
-                col.excludeLayers = 6;
+                contactCollider.excludeLayers |= itemMask;
             }
             else
             {
-                col.excludeLayers = -1;
+                contactCollider.excludeLayers &= ~itemMask;
             }
         }
 
@@ -46,6 +38,13 @@ namespace RF.GameLoop
         {
             rb.linearVelocity = Vector2.zero;
             rb.AddForce(direction * bounceForce, ForceMode2D.Impulse);
+
+            contactCollider.enabled = true;
+        }
+
+        public bool IsRising()
+        {
+            return rb.linearVelocityY > 0.01f;
         }
 
         private void OnTriggerEnter2D(Collider2D collision)

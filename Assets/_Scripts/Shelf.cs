@@ -25,7 +25,7 @@ namespace RF.Core
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (!collision.gameObject.CompareTag("KitchenObject")) return;
+            if (!collision.gameObject.CompareTag("Item")) return;
 
             if (!cupsOnShelf.Contains(collision.gameObject))
             {
@@ -37,7 +37,7 @@ namespace RF.Core
 
         private void OnTriggerExit2D(Collider2D collision)
         {
-            if (!collision.gameObject.CompareTag("KitchenObject")) return;
+            if (!collision.gameObject.CompareTag("Item")) return;
 
             if (cupsOnShelf.Contains(collision.gameObject))
             {
