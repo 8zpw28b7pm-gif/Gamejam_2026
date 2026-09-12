@@ -10,6 +10,11 @@ namespace RF.UI
         [SerializeField] private TextMeshProUGUI scoreText;
         [SerializeField] private ScoreManager scoreManager;
 
+        private void Awake()
+        {
+            UIHandler.Instance.ScoreUI = this;
+        }
+        
         private void OnEnable()
         {
             scoreManager.onScoreChanged += UpdateScoreText;

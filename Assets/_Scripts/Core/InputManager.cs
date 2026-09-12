@@ -13,12 +13,6 @@ namespace RF.Core
             playerControls.Enable();
         }
 
-        private void Update()
-        {
-            Debug.Log(GetMoveValue());
-            Debug.Log(GetTiltValue());
-        }
-
         public float GetMoveValue()
         {
             return playerControls.Player.Move.ReadValue<float>();

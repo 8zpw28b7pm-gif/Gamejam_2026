@@ -23,6 +23,8 @@ namespace RF.Core
         private void Awake()
         {
             Instance = this;
+
+            GameManager.Instance.ScoreManager = this;
         }
 
         public void AddScore(float distanceToSillhouette)
@@ -41,7 +43,7 @@ namespace RF.Core
             {
                 scoreForItem = Scores.PERFECT;
             }
-            
+
             score += (int)scoreForItem;
 
             onScoreChanged?.Invoke();

@@ -1,3 +1,4 @@
+using RF.Core;
 using RF.Items;
 using UnityEngine;
 
@@ -64,6 +65,7 @@ namespace RF.GameLoop
         {
             if (collision.gameObject.CompareTag("Floor"))
             {
+                GameManager.Instance.PlayerHealth.TakeDamage(1);
                 DestroySelf();
             }
         }
