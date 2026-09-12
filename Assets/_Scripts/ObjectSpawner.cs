@@ -1,11 +1,12 @@
 using RF.GameLoop;
+using RF.Items;
 using UnityEngine;
 
 namespace RF.Core
 {
     public class ObjectSpawner : MonoBehaviour
     {
-        [SerializeField] private Item kitchenObject;
+        [SerializeField] private ItemSO[] itemsArray;
 
         [SerializeField] private float spawnInterval = 10f;
 
@@ -38,7 +39,9 @@ namespace RF.Core
             float spawnPosX = Random.Range(minX, maxX);
             float spawnPosY = transform.position.y;
 
-            Instantiate(kitchenObject, new Vector2(spawnPosX, spawnPosY), Quaternion.identity);
+            int randomIndex = Random.Range(0, itemsArray.Length);
+
+            Instantiate(itemsArray[randomIndex].GetPrefab(), new Vector2(spawnPosX, spawnPosY), Quaternion.identity);
         }
     }
 }

@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ba06585dfaea4bdba88bdfeea2cea23, type: 3}
+  m_Name: Red Shelf_ShelfSO
+  m_EditorClassIdentifier: Assembly-CSharp::RF.Items.ShelfSO
+  shelfPrefab: {fileID: 2684760397575825516, guid: 99375ba3462f04cd88c4aa93909a2703, type: 3}
+  preferredItemSO: {fileID: 11400000, guid: 15df6cea0ff4c499983eb4636ef5504a, type: 2}
