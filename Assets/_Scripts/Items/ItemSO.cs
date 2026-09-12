@@ -7,9 +7,13 @@ namespace RF.Items
     public class ItemSO : ScriptableObject
     {
         [SerializeField] private Item itemPrefab;
-        [SerializeField] private GameObject sillhouettePrefab;
+        [SerializeField] private GameObject itemVisualPrefab;
 
         public Item GetPrefab() => itemPrefab;
-        public GameObject GetSillhouettePrefab() => sillhouettePrefab;
+
+        public Transform SpawnVisual(Vector3 position, Transform parent)
+        {
+            return Instantiate(itemVisualPrefab.transform, position, Quaternion.identity, parent);
+        }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace RF.Core
@@ -6,6 +7,8 @@ namespace RF.Core
     public class ScoreManager : MonoBehaviour
     {
         public static ScoreManager Instance;
+
+        public static int HighScore;
 
         public enum Scores
         {
@@ -27,8 +30,26 @@ namespace RF.Core
             GameManager.Instance.ScoreManager = this;
         }
 
+        private void OnEnable()
+        {
+            GameManager.Instance.onStateChanged += GameManager_OnStateChanged;
+        }
+
+        private void GameManager_OnStateChanged()
+        {
+            if (GameManager.Instance.State == GameState.GameOver)
+            {
+                if (score > HighScore)
+                {
+                    HighScore = score;
+                }
+            }
+        }
+
         public void AddScore(float distanceToSillhouette)
         {
+            if (GameManager.Instance.State != GameState.Running) return;
+
             Scores scoreForItem = Scores.NONE;
 
             if (distanceToSillhouette > 0.5f)
@@ -51,6 +72,8 @@ namespace RF.Core
 
         public void RemoveScore()
         {
+            if (GameManager.Instance.State != GameState.Running) return;
+            
             score--;
             onScoreChanged?.Invoke();
         }

@@ -1,4 +1,3 @@
-using System;
 using RF.Core;
 using TMPro;
 using UnityEngine;
@@ -14,7 +13,7 @@ namespace RF.UI
         {
             UIHandler.Instance.ScoreUI = this;
         }
-        
+
         private void OnEnable()
         {
             scoreManager.onScoreChanged += UpdateScoreText;

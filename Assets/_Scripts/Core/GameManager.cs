@@ -38,6 +38,8 @@ namespace RF.Core
         {
             if (newState == state && !forceReset) return;
 
+            state = newState;
+            
             onStateChanged?.Invoke();
         }
     }

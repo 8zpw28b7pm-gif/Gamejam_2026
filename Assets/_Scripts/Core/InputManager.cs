@@ -9,18 +9,27 @@ namespace RF.Core
         private void Awake()
         {
             playerControls = new PlayerControls();
+        }
 
+        private void Start()
+        {
+            Cursor.visible = false;
+        }
+
+        private void OnEnable()
+        {
             playerControls.Enable();
         }
 
-        public float GetMoveValue()
+        private void OnDisable()
         {
-            return playerControls.Player.Move.ReadValue<float>();
+            playerControls.Disable();
         }
 
-        public float GetTiltValue()
+        public Vector2 GetMovementVectorNormalized()
         {
-            return playerControls.Player.Tilt.ReadValue<float>();
+            return playerControls.Player.Move.ReadValue<Vector2>().normalized;
         }
+
     }
 }

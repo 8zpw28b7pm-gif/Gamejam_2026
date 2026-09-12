@@ -8,8 +8,10 @@ namespace RF.Items
     {
         [SerializeField] private Shelf shelfPrefab;
         [SerializeField] private ItemSO preferredItemSO;
+        [SerializeField] private int requiredItemAmount;
 
         public Shelf GetPrefab() => shelfPrefab;
         public ItemSO GetPreferredItemSO() => preferredItemSO;
+        public int GetRequiredItemAmount() => requiredItemAmount;
     }
 }

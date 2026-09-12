@@ -7,7 +7,7 @@ namespace RF.Core
     {
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (!collision.gameObject.CompareTag("KitchenObject"))
+            if (!collision.gameObject.CompareTag("Item"))
             {
                 
             }

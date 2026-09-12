@@ -25,6 +25,8 @@ namespace RF.Core
         }
         private void Update()
         {
+            if (GameManager.Instance.State != GameState.Running) return;
+
             timeSinceSpawned += Time.deltaTime;
 
             if (timeSinceSpawned >= spawnInterval)
