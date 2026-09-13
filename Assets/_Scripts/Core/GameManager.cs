@@ -18,6 +18,7 @@ namespace RF.Core
         public Health PlayerHealth { get; set; }
         public ScoreManager ScoreManager { get; set; }
         public ItemTracker ItemTracker { get; set; }
+        public ShelfSpawner ShelfSpawner { get; set; }
 
         private float timeSinceGameStart = 0;
 

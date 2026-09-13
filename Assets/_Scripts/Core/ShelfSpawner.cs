@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using RF.Items;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace RF.Core
@@ -17,7 +18,14 @@ namespace RF.Core
         [SerializeField] private float spawnInterval = 10f;
         private float timeSinceLastSpawned = 0;
 
+        private List<Shelf> spawnedShelves;
+
         private int shelfRange = 0;
+
+        private void Awake()
+        {
+            GameManager.Instance.ShelfSpawner = this;
+        }
 
         private void Start()
         {
@@ -70,8 +78,5 @@ namespace RF.Core
                 break;
             }
         }
-
-
-
     }
 }

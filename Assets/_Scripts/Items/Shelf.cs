@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Linq;
 using RF.Items;
 using RF.UI;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace RF.Core
@@ -78,11 +76,24 @@ namespace RF.Core
             }
         }
 
-        private bool HasEmptySlot()
+        public bool HasEmptySlot()
         {
             for (int i = 0; i < shelfSlots.Length; i++)
             {
                 if (shelfSlots[i].GetItemSO() == null) return true;
+            }
+
+            return false;
+        }
+
+        public bool HasSpaceForItem(ItemSO itemSO)
+        {
+            foreach (var slot in shelfSlots)
+            {
+                if (slot.GetPreferredItemSO() == itemSO)
+                {
+                    return true;
+                }
             }
 
             return false;
@@ -100,5 +111,7 @@ namespace RF.Core
         {
             Destroy(gameObject, destroyDelay);
         }
+
+
     }
 }
