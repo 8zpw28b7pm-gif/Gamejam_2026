@@ -8,12 +8,18 @@ namespace RF.Items
     {
         [SerializeField] private Item itemPrefab;
         [SerializeField] private GameObject itemVisualPrefab;
+        [SerializeField] private GameObject silhouettePrefab;
 
         public Item GetPrefab() => itemPrefab;
 
         public Transform SpawnVisual(Vector3 position, Transform parent)
         {
             return Instantiate(itemVisualPrefab.transform, position, Quaternion.identity, parent);
+        }
+
+        public Transform SpawnSilhouette(Vector3 position, Transform parent)
+        {
+            return Instantiate(silhouettePrefab.transform, parent.position, Quaternion.identity, parent);
         }
     }
 }

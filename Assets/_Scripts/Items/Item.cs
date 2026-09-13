@@ -8,9 +8,6 @@ namespace RF.GameLoop
     {
         [SerializeField] private ItemSO itemSO;
 
-        [SerializeField] private float bounceForce = 5;
-        // [SerializeField] private Collider2D contactCollider;
-
         private Rigidbody2D rb;
 
         private bool hasTouchedTrampoline = false;
@@ -20,22 +17,36 @@ namespace RF.GameLoop
             rb = GetComponent<Rigidbody2D>();
         }
 
+        private void OnEnable()
+        {
+            GameManager.Instance.ItemTracker.RegisterItem(this);
+        }
+
         public ItemSO GetItemSO()
         {
             return itemSO;
         }
 
-        public void ApplyForce(Vector2 direction)
+        public bool ApplyForce(Vector2 direction)
         {
+            if (IsRising()) return false;
+
             rb.linearVelocity = Vector2.zero;
             rb.AddForce(direction, ForceMode2D.Impulse);
 
             hasTouchedTrampoline = true;
+
+            return true;
         }
 
         public bool IsRising()
         {
             return rb.linearVelocityY > 0.01f;
+        }
+
+        public bool IsFalling()
+        {
+            return rb.linearVelocityY < -0.025f;
         }
 
         public bool HasTouchedTrampoline()
@@ -53,12 +64,16 @@ namespace RF.GameLoop
             if (collision.gameObject.CompareTag("Floor"))
             {
                 GameManager.Instance.PlayerHealth.TakeDamage(1);
+
+                GameManager.Instance.AudioManager.PlayFallOffScreenSound();
+
                 DestroySelf();
             }
         }
 
         public void DestroySelf()
         {
+            GameManager.Instance.ItemTracker.DeregisterItem(this);
             Destroy(gameObject);
         }
     }

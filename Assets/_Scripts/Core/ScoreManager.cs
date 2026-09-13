@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -10,16 +11,13 @@ namespace RF.Core
 
         public static int HighScore;
 
-        public enum Scores
-        {
-            BAD = -1,
-            NONE = 0,
-            GOOD = 1,
-            GREAT = 2,
-            PERFECT = 5
-        }
+        public static List<int> HighscoreList = new();
 
         [SerializeField] private int score;
+
+        [SerializeField] private AudioClip pointUpClip;
+        [SerializeField] private AudioClip pointDownClip;
+        [SerializeField] private float pointAudioVolume;
 
         public event Action onScoreChanged;
 
@@ -42,39 +40,30 @@ namespace RF.Core
                 if (score > HighScore)
                 {
                     HighScore = score;
+                    HighscoreList.Add(score);
+                    HighscoreList.Sort();
                 }
             }
         }
 
-        public void AddScore(float distanceToSillhouette)
+        public void AddScore(int amount)
         {
             if (GameManager.Instance.State != GameState.Running) return;
 
-            Scores scoreForItem = Scores.NONE;
+            score = Mathf.Max(score + amount, 0);
 
-            if (distanceToSillhouette > 0.5f)
+            if (pointDownClip != null && pointUpClip != null)
             {
-                scoreForItem = Scores.GOOD;
-            }
-            else if (distanceToSillhouette < 0.5f && distanceToSillhouette > 0.2f)
-            {
-                scoreForItem = Scores.GREAT;
-            }
-            else if (distanceToSillhouette < 0.1f)
-            {
-                scoreForItem = Scores.PERFECT;
+                if (amount < 0)
+                {
+                    AudioSource.PlayClipAtPoint(pointDownClip, Camera.main.transform.position, pointAudioVolume);
+                }
+                else
+                {
+                    AudioSource.PlayClipAtPoint(pointUpClip, Camera.main.transform.position, pointAudioVolume);
+                }
             }
 
-            score += (int)scoreForItem;
-
-            onScoreChanged?.Invoke();
-        }
-
-        public void RemoveScore()
-        {
-            if (GameManager.Instance.State != GameState.Running) return;
-            
-            score--;
             onScoreChanged?.Invoke();
         }
 

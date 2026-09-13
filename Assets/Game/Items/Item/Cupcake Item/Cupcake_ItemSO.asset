@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7766a6dc02d5b476cad06d85c8304a5e, type: 3}
   m_Name: Cupcake_ItemSO
   m_EditorClassIdentifier: Assembly-CSharp::RF.Items.ItemSO
-  itemPrefab: {fileID: 4849946192326370913, guid: c632826f9313c49e08d69dbbb00a6e94, type: 3}
-  itemVisualPrefab: {fileID: 8991178694071458498, guid: 83ad08c2e9c0542c1a9b8c9ac1607a99, type: 3}
-  sillhouettePrefab: {fileID: 7103491685086677572, guid: 8f24a5f03494f4b4e9a80e733de27e13, type: 3}
+  itemPrefab: {fileID: 4849946192326370913, guid: 30cee5a063cc04cb1bff70b87462169f, type: 3}
+  itemVisualPrefab: {fileID: 8991178694071458498, guid: 73f196d6a05c34d398a52762a19c3afa, type: 3}
+  silhouettePrefab: {fileID: 1198618237162054303, guid: 4c7eb1db4c35c41108ad40127ace2da5, type: 3}

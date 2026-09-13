@@ -8,6 +8,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6845052243238566039}
     m_Modifications:
+    - target: {fileID: 131223158419801807, guid: 6e1704da37d1240c5b458e711391a451, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 131223158419801807, guid: 6e1704da37d1240c5b458e711391a451, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 131223158419801807, guid: 6e1704da37d1240c5b458e711391a451, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 131223158419801807, guid: 6e1704da37d1240c5b458e711391a451, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.301
+      objectReference: {fileID: 0}
+    - target: {fileID: 131223158419801807, guid: 6e1704da37d1240c5b458e711391a451, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3085107987386315908, guid: 6e1704da37d1240c5b458e711391a451, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -81,6 +101,18 @@ PrefabInstance:
     - target: {fileID: 444471094413776209, guid: d093914433acd453591adf499b3d9f42, type: 3}
       propertyPath: m_Offset.y
       value: 0.37719834
+      objectReference: {fileID: 0}
+    - target: {fileID: 2637403720869856143, guid: d093914433acd453591adf499b3d9f42, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2637403720869856143, guid: d093914433acd453591adf499b3d9f42, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2637403720869856143, guid: d093914433acd453591adf499b3d9f42, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2754966017872725004, guid: d093914433acd453591adf499b3d9f42, type: 3}
       propertyPath: m_LocalScale.x
@@ -166,21 +198,25 @@ PrefabInstance:
       propertyPath: itemSO
       value: 
       objectReference: {fileID: 11400000, guid: a9a5a53538aa442e0bcf8f03d0e53e6e, type: 2}
+    - target: {fileID: 4118834706774711673, guid: d093914433acd453591adf499b3d9f42, type: 3}
+      propertyPath: destroyAudio.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4705098307909639798, guid: d093914433acd453591adf499b3d9f42, type: 3}
       propertyPath: m_Size.x
-      value: 0.024317108
+      value: 0.057797275
       objectReference: {fileID: 0}
     - target: {fileID: 4705098307909639798, guid: d093914433acd453591adf499b3d9f42, type: 3}
       propertyPath: m_Size.y
-      value: 0.11374135
+      value: 0.17713588
       objectReference: {fileID: 0}
     - target: {fileID: 4705098307909639798, guid: d093914433acd453591adf499b3d9f42, type: 3}
       propertyPath: m_Offset.x
-      value: -0.037499443
+      value: -0.037499428
       objectReference: {fileID: 0}
     - target: {fileID: 4705098307909639798, guid: d093914433acd453591adf499b3d9f42, type: 3}
       propertyPath: m_Offset.y
-      value: 0.038180374
+      value: 0.069877654
       objectReference: {fileID: 0}
     - target: {fileID: 6354072276252220408, guid: d093914433acd453591adf499b3d9f42, type: 3}
       propertyPath: m_Color.b
