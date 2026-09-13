@@ -1,4 +1,7 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace RF.Core
 {
@@ -13,17 +16,48 @@ namespace RF.Core
 
         private void Start()
         {
-            Cursor.visible = false;
+
         }
 
         private void OnEnable()
         {
+            playerControls.Player.Escape.performed += OnEscape;
             playerControls.Enable();
+
+            GameManager.Instance.onStateChanged += GameManager_OnStateChanged;
+        }
+
+        private void OnEscape(InputAction.CallbackContext context)
+        {
+            GameState state = GameManager.Instance.State;
+            
+            if (state == GameState.Running || state == GameState.WaitingToStart)
+            {
+                GameManager.Instance.SetState(GameState.Paused);
+            }
+            else if (state == GameState.Paused)
+            {
+                GameManager.Instance.SetState(GameState.Running);
+            }
         }
 
         private void OnDisable()
         {
             playerControls.Disable();
+
+            GameManager.Instance.onStateChanged -= GameManager_OnStateChanged;
+        }
+
+        private void GameManager_OnStateChanged()
+        {
+            if (GameManager.Instance.State == GameState.Running)
+            {
+                Cursor.visible = false;
+            }
+            else
+            {
+                Cursor.visible = true;
+            }
         }
 
         public Vector2 GetMovementVectorNormalized()

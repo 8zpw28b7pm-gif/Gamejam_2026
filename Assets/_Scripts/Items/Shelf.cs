@@ -1,27 +1,26 @@
-using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
-using System.Runtime.ConstrainedExecution;
-using NUnit.Framework;
-using RF.GameLoop;
 using RF.Items;
+using RF.UI;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.TextCore;
 
 namespace RF.Core
 {
     public class Shelf : MonoBehaviour
     {
         [SerializeField] private ShelfSlot[] shelfSlots;
-        [SerializeField] private CombinationsListSO combinationsListSO;
-
         private float destroyDelay = 1f;
+
+        [SerializeField] private ScoreDataSO scoreDataSO;
+        [SerializeField] private FloatingText floatingTextPrefab;
+
 
         private void OnEnable()
         {
             foreach (var slot in shelfSlots)
             {
-                slot.onSlotChanged += EvaluateSlots;
+                slot.onSlotChanged += ShelfSlot_OnSlotChanged;
             }
         }
 
@@ -29,53 +28,72 @@ namespace RF.Core
         {
             foreach (var slot in shelfSlots)
             {
-                slot.onSlotChanged -= EvaluateSlots;
+                slot.onSlotChanged -= ShelfSlot_OnSlotChanged;
             }
         }
 
-        private void EvaluateSlots()
+        public void Init(ItemListSO itemListSO)
         {
-            foreach (var slot in shelfSlots)
+            InitialiseSlots(itemListSO);
+        }
+
+        private void InitialiseSlots(ItemListSO itemListSO)
+        {
+            for (int i = 0; i < shelfSlots.Length; i++)
             {
-                if (!slot.HasItem()) return;
+                int randomItemIndex = Random.Range(0, itemListSO.GetItemList().ToList<ItemSO>().Count);
+                ItemSO randomItem = itemListSO.GetItemList().ToList<ItemSO>()[randomItemIndex];
+
+                shelfSlots[i].SetPreferredItemSO(randomItem);
             }
+        }
 
-            Debug.Log($"{transform.name} all slots");
-
-            CombinationSO matchingCombo = null;
-
-            foreach (var combo in combinationsListSO.GetAllCombinations())
+        private void ShelfSlot_OnSlotChanged(ShelfSlot shelfSlot)
+        {
+            if (!HasEmptySlot())
             {
-                for (int i = 0; i < combo.GetItemList().Count(); i++)
+                for (int i = 0; i < shelfSlots.Length; i++)
                 {
-                    if (shelfSlots[i].GetItemSO() == combo.GetItemList().ToList<ItemSO>()[i])
+                    if (shelfSlots[i].GetItemSO() != shelfSlots[i].GetPreferredItemSO())
                     {
-                        matchingCombo = combo;
+                        AwardPoints(scoreDataSO.WrongItem);
                         break;
                     }
+                    AwardPoints(scoreDataSO.CorrectLastItem);
+                }
+                DestroySelf();
+                return;
+            }
+
+            if (shelfSlot.HasItem())
+            {
+                if (shelfSlot.GetItemSO() == shelfSlot.GetPreferredItemSO())
+                {
+                    AwardPoints(scoreDataSO.CorrectItem);
+                }
+                else
+                {
+                    AwardPoints(scoreDataSO.WrongItem);
                 }
             }
-
-            Debug.Log($"Found Matching Combo: {matchingCombo}");
-
-            if (matchingCombo != null)
-            {
-                AwardPoints(matchingCombo);
-                ClearShelf();
-            }
         }
 
-        private void AwardPoints(CombinationSO combinationSO)
+        private bool HasEmptySlot()
         {
-            GameManager.Instance.ScoreManager.AddScore(combinationSO.GetPoints());
+            for (int i = 0; i < shelfSlots.Length; i++)
+            {
+                if (shelfSlots[i].GetItemSO() == null) return true;
+            }
+
+            return false;
         }
 
-        private void ClearShelf()
+        private void AwardPoints(int amount)
         {
-            foreach (var slot in shelfSlots)
-            {
-                slot.ClearSlot();
-            }
+            FloatingText spawnedText = Instantiate(floatingTextPrefab, new Vector2(transform.position.x, transform.position.y + 1f), Quaternion.identity, null);
+            spawnedText.Init(amount);
+
+            GameManager.Instance.ScoreManager.AddScore(amount);
         }
 
         private void DestroySelf()

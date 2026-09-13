@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RF.Items.ItemSO
   itemPrefab: {fileID: 4849946192326370913, guid: c632826f9313c49e08d69dbbb00a6e94, type: 3}
   itemVisualPrefab: {fileID: 8991178694071458498, guid: 83ad08c2e9c0542c1a9b8c9ac1607a99, type: 3}
-  sillhouettePrefab: {fileID: 7103491685086677572, guid: 8f24a5f03494f4b4e9a80e733de27e13, type: 3}
+  silhouettePrefab: {fileID: 1198618237162054303, guid: 38a4efde09ed44a68b981ca45943d14d, type: 3}

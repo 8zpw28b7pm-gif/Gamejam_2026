@@ -26,8 +26,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3329970461232624748}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 4118834706774711673}
   - component: {fileID: 4705098307909639798}
   - component: {fileID: 6354480740459354233}
+  - component: {fileID: -6080167608328947466}
   m_Layer: 8
   m_Name: _Item
   m_TagString: Item
@@ -79,7 +80,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RF.GameLoop.KitchenObject
   itemSO: {fileID: 0}
-  bounceForce: 10
+  destroyAudio:
+  - {fileID: 8300000, guid: 1ddc61b73c0aa4f9ca77ac4a6a70d693, type: 3}
+  - {fileID: 8300000, guid: f1e73cdf022a94150a5219f79e0497a5, type: 3}
 --- !u!61 &4705098307909639798
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -96,7 +99,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -139,7 +142,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 0
+  m_LinearDamping: 0.4
   m_AngularDamping: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
@@ -153,3 +156,16 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!210 &-6080167608328947466
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6397057619730231921}
+  m_Enabled: 1
+  m_SortingLayerID: 146992459
+  m_SortingLayer: 1
+  m_SortingOrder: 10
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0

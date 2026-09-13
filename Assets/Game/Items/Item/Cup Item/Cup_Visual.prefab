@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 832543310613328565, guid: 3c47ef5246f4040109cb708433dd3041, type: 3}
       propertyPath: m_Name
-      value: Cup_Item Visual
+      value: Cup_Visual
       objectReference: {fileID: 0}
     - target: {fileID: 4442588308230778074, guid: 3c47ef5246f4040109cb708433dd3041, type: 3}
       propertyPath: m_Sprite
@@ -58,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8545842097010667192, guid: 3c47ef5246f4040109cb708433dd3041, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.36
+      value: 0.257
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

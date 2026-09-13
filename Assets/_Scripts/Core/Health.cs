@@ -9,6 +9,7 @@ namespace RF.Core
         [SerializeField] private int healthMax;
 
         private bool isDead;
+        public bool isInvulnerable;
 
         public event Action onHealthChanged;
         public event Action onDeath;
@@ -28,16 +29,22 @@ namespace RF.Core
             return healthMax;
         }
 
+        public void SetInvulnerable(bool enable)
+        {
+            isInvulnerable = enable;
+        }
+
         public void TakeDamage(int amount)
         {
             if (isDead) return;
+            if (isInvulnerable) return;
 
             health = Mathf.Max(0, health - amount);
 
             onHealthChanged?.Invoke();
 
             Debug.Log("Take Damage");
-            
+
             if (health == 0)
             {
                 Die();
